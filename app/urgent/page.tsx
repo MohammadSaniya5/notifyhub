@@ -56,7 +56,7 @@ function Countdown({ deadline }: { deadline: string }) {
 
   return (
   <span style={{ color: '#fbbf24', fontSize: '12px', fontWeight: '600' }}>
-    📅 {deadline || 'Not specified'}
+    🕒 Now: {new Date().toLocaleDateString()} | {new Date().toLocaleTimeString()}
   </span>
 )
 }
