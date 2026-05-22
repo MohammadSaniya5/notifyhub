@@ -1,23 +1,19 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
+import { deleteAnnouncement } from '@/app/lib/kv'
 
-import {
-  deleteAnnouncement,
-} from '@/app/lib/kv'
+type Context = {
+  params: Promise<{ id: string }>
+}
 
 export async function DELETE(
-  req: NextRequest,
-  { params }: { params: { id: string } }
+  request: Request,
+  context: Context
 ) {
   try {
+    const params = await context.params
     await deleteAnnouncement(params.id)
-
-    return NextResponse.json({
-      success: true,
-    })
+    return NextResponse.json({ success: true })
   } catch {
-    return NextResponse.json(
-      { error: 'Failed' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: 'Failed' }, { status: 500 })
   }
 }

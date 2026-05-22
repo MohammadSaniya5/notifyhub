@@ -1,19 +1,38 @@
-import { NextResponse } from 'next/server'
-import { deleteAnnouncement } from '@/app/lib/kv'
+import { NextRequest, NextResponse } from 'next/server'
 
-type Context = {
-  params: Promise<{ id: string }>
+import {
+  getAnnouncements,
+  saveAnnouncement,
+} from '@/app/lib/kv'
+
+export async function GET() {
+  const announcements = await getAnnouncements()
+
+  return NextResponse.json(announcements)
 }
 
-export async function DELETE(
-  request: Request,
-  context: Context
-) {
+export async function POST(req: NextRequest) {
   try {
-    const params = await context.params
-    await deleteAnnouncement(params.id)
-    return NextResponse.json({ success: true })
-  } catch {
-    return NextResponse.json({ error: 'Failed' }, { status: 500 })
+    const body = await req.json()
+
+    const announcement = await saveAnnouncement({
+      title: body.title,
+      description: body.description,
+      category: body.category,
+      department: body.department,
+      date: new Date().toLocaleDateString('en-IN'),
+      urgent: body.urgent || false,
+      image: body.image || '',
+      link: body.link || '',
+    })
+
+    return NextResponse.json(announcement)
+  } catch (error) {
+    console.error(error)
+
+    return NextResponse.json(
+      { error: 'Failed' },
+      { status: 500 }
+    )
   }
 }
