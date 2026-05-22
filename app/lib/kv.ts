@@ -11,14 +11,23 @@ export interface Announcement {
   createdAt: number
 }
 
-let announcements: Announcement[] = []
+// In-memory store for local development
+let localAnnouncements: Announcement[] = []
 
 export async function getAnnouncements(): Promise<Announcement[]> {
-  return announcements
+  if (process.env.KV_REST_API_URL) {
+    const { kv } = await import('@vercel/kv')
+    const data = await kv.get<Announcement[]>('announcements')
+    return data || []
+  }
+  return localAnnouncements
 }
 
-export async function saveAnnouncements(
-  data: Announcement[]
-): Promise<void> {
-  announcements = data
+export async function saveAnnouncements(announcements: Announcement[]): Promise<void> {
+  if (process.env.KV_REST_API_URL) {
+    const { kv } = await import('@vercel/kv')
+    await kv.set('announcements', announcements)
+    return
+  }
+  localAnnouncements = announcements
 }
