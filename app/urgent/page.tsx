@@ -18,13 +18,26 @@ function Countdown({ deadline }: { deadline: string }) {
 
   useEffect(() => {
     const calc = () => {
-      const diff = new Date(deadline).getTime() - new Date().getTime()
-      if (diff <= 0) { setTimeLeft('DEADLINE PASSED'); return }
-      const d = Math.floor(diff / 86400000)
-      const h = Math.floor((diff % 86400000) / 3600000)
-      const m = Math.floor((diff % 3600000) / 60000)
-      setTimeLeft(`${d}d ${h}h ${m}m remaining`)
-    }
+  const target = new Date(deadline + "T23:59:59").getTime()
+
+  if (isNaN(target)) {
+    setTimeLeft('INVALID DATE')
+    return
+  }
+
+  const diff = target - Date.now()
+
+  if (diff <= 0) {
+    setTimeLeft('DEADLINE PASSED')
+    return
+  }
+
+  const d = Math.floor(diff / 86400000)
+  const h = Math.floor((diff % 86400000) / 3600000)
+  const m = Math.floor((diff % 3600000) / 60000)
+
+  setTimeLeft(`${d}d ${h}h ${m}m remaining`)
+}
     calc()
     const t = setInterval(calc, 60000)
     return () => clearInterval(t)

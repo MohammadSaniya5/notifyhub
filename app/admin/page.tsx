@@ -15,7 +15,7 @@ export default function AdminLogin() {
     setError('')
 
     setTimeout(() => {
-      if (username === 'admin' && password === 'notifyhub123') {
+      if (username === 'balaji' && password === 'balaji7') {
         localStorage.setItem('admin_auth', 'true')
         router.push('/admin/dashboard')
       } else {
