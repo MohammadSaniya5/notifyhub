@@ -1,30 +1,11 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
+import { deleteAnnouncement } from '@/app/lib/kv'
 
-import {
-  getAnnouncements,
-  saveAnnouncements,
-} from '@/app/lib/kv'
-
-export async function DELETE(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
+export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
   try {
-    const announcements = await getAnnouncements()
-
-    const filtered = announcements.filter(
-      (a) => a.id !== params.id
-    )
-
-    await saveAnnouncements(filtered)
-
+    await deleteAnnouncement(params.id)
     return NextResponse.json({ success: true })
-  } catch (error) {
-    console.error(error)
-
-    return NextResponse.json(
-      { error: 'Delete failed' },
-      { status: 500 }
-    )
+  } catch {
+    return NextResponse.json({ error: 'Failed' }, { status: 500 })
   }
 }
