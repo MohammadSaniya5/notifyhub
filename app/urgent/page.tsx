@@ -18,43 +18,47 @@ function Countdown({ deadline }: { deadline: string }) {
 
   useEffect(() => {
     const normalizeDate = (d: string) => {
-  // handles DD-MM-YYYY
-  if (d.includes('-') && d.split('-')[0].length === 2) {
-    const [dd, mm, yyyy] = d.split('-')
-    return new Date(`${yyyy}-${mm}-${dd}T23:59:59`)
-  }
+      // handles DD-MM-YYYY
+      if (d.includes('-') && d.split('-')[0].length === 2) {
+        const [dd, mm, yyyy] = d.split('-')
+        return new Date(`${yyyy}-${mm}-${dd}T23:59:59`)
+      }
 
-  // already ISO (YYYY-MM-DD)
-  return new Date(`${d}T23:59:59`)
-}
+      // already ISO (YYYY-MM-DD)
+      return new Date(`${d}T23:59:59`)
+    }
 
-const calc = () => {
-  const target = normalizeDate(deadline).getTime()
+    const calc = () => {
+      const target = normalizeDate(deadline).getTime()
 
-  if (isNaN(target)) {
-    setTimeLeft('INVALID DATE')
-    return
-  }
+      if (isNaN(target)) {
+        setTimeLeft('INVALID DATE')
+        return
+      }
 
-  const diff = target - Date.now()
+      const diff = target - Date.now()
 
-  if (diff <= 0) {
-    setTimeLeft('DEADLINE PASSED')
-    return
-  }
+      if (diff <= 0) {
+        setTimeLeft('DEADLINE PASSED')
+        return
+      }
 
-  const d = Math.floor(diff / 86400000)
-  const h = Math.floor((diff % 86400000) / 3600000)
-  const m = Math.floor((diff % 3600000) / 60000)
+      const d = Math.floor(diff / 86400000)
+      const h = Math.floor((diff % 86400000) / 3600000)
+      const m = Math.floor((diff % 3600000) / 60000)
 
-  setTimeLeft(`${d}d ${h}h ${m}m remaining`)
-}
+      setTimeLeft(`${d}d ${h}h ${m}m remaining`)
+    }
     calc()
     const t = setInterval(calc, 30000)
     return () => clearInterval(t)
   }, [deadline])
 
-  return <span style={{ color: '#fbbf24', fontSize: '12px', fontWeight: '600' }}>⏳ {timeLeft}</span>
+  return (
+  <span style={{ color: '#fbbf24', fontSize: '12px', fontWeight: '600' }}>
+    📅 {deadline || 'Not specified'}
+  </span>
+)
 }
 
 export default function Urgent() {
@@ -84,63 +88,63 @@ export default function Urgent() {
 
         {/* Header */}
         <div style={{
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  flexWrap: 'wrap',
-  gap: '16px',
-  marginBottom: '8px',
-}}>
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '16px',
+          marginBottom: '8px',
+        }}>
 
-  <div style={{
-    display: 'flex',
-    alignItems: 'center',
-    gap: '14px',
-  }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '14px',
+          }}>
 
-    <span style={{
-      width: '46px',
-      height: '46px',
-      borderRadius: '14px',
-      background: 'linear-gradient(135deg,#ef4444,#dc2626)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      fontSize: '22px',
-      boxShadow: '0 0 22px rgba(239,68,68,0.35)',
-    }}>
-      🛡️
-    </span>
+            <span style={{
+              width: '46px',
+              height: '46px',
+              borderRadius: '14px',
+              background: 'linear-gradient(135deg,#ef4444,#dc2626)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '22px',
+              boxShadow: '0 0 22px rgba(239,68,68,0.35)',
+            }}>
+              🛡️
+            </span>
 
-    <h1 style={{
-      fontSize: '36px',
-      fontWeight: '700',
-      margin: 0,
-      background: 'linear-gradient(135deg,#ffffff,#f87171)',
-      WebkitBackgroundClip: 'text',
-      WebkitTextFillColor: 'transparent',
-      letterSpacing: '-1px',
-    }}>
-      Urgent Alerts
-    </h1>
+            <h1 style={{
+              fontSize: '36px',
+              fontWeight: '700',
+              margin: 0,
+              background: 'linear-gradient(135deg,#ffffff,#f87171)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              letterSpacing: '-1px',
+            }}>
+              Urgent Alerts
+            </h1>
 
-  </div>
+          </div>
 
-  <span style={{
-    background: blink ? 'rgba(239,68,68,0.18)' : 'rgba(239,68,68,0.08)',
-    color: '#f87171',
-    border: '1px solid rgba(239,68,68,0.35)',
-    fontSize: '11px',
-    padding: '6px 14px',
-    borderRadius: '999px',
-    fontWeight: '700',
-    transition: 'all 0.3s ease',
-    boxShadow: blink ? '0 0 18px rgba(239,68,68,0.25)' : 'none',
-  }}>
-    ● LIVE MONITORING
-  </span>
+          <span style={{
+            background: blink ? 'rgba(239,68,68,0.18)' : 'rgba(239,68,68,0.08)',
+            color: '#f87171',
+            border: '1px solid rgba(239,68,68,0.35)',
+            fontSize: '11px',
+            padding: '6px 14px',
+            borderRadius: '999px',
+            fontWeight: '700',
+            transition: 'all 0.3s ease',
+            boxShadow: blink ? '0 0 18px rgba(239,68,68,0.25)' : 'none',
+          }}>
+            ● LIVE MONITORING
+          </span>
 
-</div>
+        </div>
         <p style={{ color: '#64748b', fontSize: '14px', marginBottom: '36px' }}>
           High priority notices requiring immediate attention
         </p>
