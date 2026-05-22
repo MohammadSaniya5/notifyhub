@@ -17,8 +17,19 @@ function Countdown({ deadline }: { deadline: string }) {
   const [timeLeft, setTimeLeft] = useState('')
 
   useEffect(() => {
-    const calc = () => {
-  const target = new Date(deadline + "T23:59:59").getTime()
+    const normalizeDate = (d: string) => {
+  // handles DD-MM-YYYY
+  if (d.includes('-') && d.split('-')[0].length === 2) {
+    const [dd, mm, yyyy] = d.split('-')
+    return new Date(`${yyyy}-${mm}-${dd}T23:59:59`)
+  }
+
+  // already ISO (YYYY-MM-DD)
+  return new Date(`${d}T23:59:59`)
+}
+
+const calc = () => {
+  const target = normalizeDate(deadline).getTime()
 
   if (isNaN(target)) {
     setTimeLeft('INVALID DATE')
@@ -39,7 +50,7 @@ function Countdown({ deadline }: { deadline: string }) {
   setTimeLeft(`${d}d ${h}h ${m}m remaining`)
 }
     calc()
-    const t = setInterval(calc, 60000)
+    const t = setInterval(calc, 30000)
     return () => clearInterval(t)
   }, [deadline])
 
