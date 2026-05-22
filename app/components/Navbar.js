@@ -41,12 +41,21 @@ export default function Navbar() {
             background: '#2563eb', display: 'flex',
             alignItems: 'center', justifyContent: 'center', fontSize: '18px',
           }}>🔔</div>
-          <span style={{ fontSize: '18px', fontWeight: '600', color: '#f1f5f9' }}>NotifyHub</span>
           <span style={{
-            fontSize: '10px', background: 'rgba(37,99,235,0.2)',
-            color: '#60a5fa', border: '1px solid rgba(37,99,235,0.3)',
-            padding: '2px 8px', borderRadius: '99px',
-          }}>BETA</span>
+  fontSize: '22px',
+  fontWeight: '700',
+  position: 'relative',
+  color: '#f8fafc',
+  letterSpacing: '0.5px',
+  background: 'linear-gradient(120deg, #f8fafc 0%, #60a5fa 35%, #ffffff 50%, #60a5fa 65%, #f8fafc 100%)',
+  backgroundSize: '200% auto',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  animation: 'shine 4s linear infinite',
+}}>
+  NotifyHub
+</span>
+           
         </Link>
 
         {/* Desktop Links */}
@@ -118,6 +127,14 @@ export default function Navbar() {
           .hamburger { display: block !important; }
           nav { padding: 0 16px !important; }
         }
+          @keyframes shine {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
       `}</style>
     </nav>
   )

@@ -40,9 +40,42 @@ export default function Announcements() {
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
 
         <div style={{ marginBottom: '32px' }}>
-          <h1 style={{ fontSize: '36px', fontWeight: '700', color: '#f1f5f9', marginBottom: '8px' }}>📢 Announcements</h1>
-          <p style={{ color: '#64748b', fontSize: '14px' }}>All college notices in one place — updated live by admin</p>
-        </div>
+  <h1 style={{
+    fontSize: '36px',
+    fontWeight: '700',
+    color: '#f1f5f9',
+    marginBottom: '8px',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px',
+    letterSpacing: '-1px',
+  }}>
+    
+    <span style={{
+      fontSize: '30px',
+      filter: 'drop-shadow(0 0 10px rgba(96,165,250,0.35))',
+    }}>
+      🏛️
+    </span>
+
+    <span style={{
+      background: 'linear-gradient(135deg, #f8fafc 0%, #60a5fa 100%)',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+    }}>
+      Announcements
+    </span>
+
+  </h1>
+
+  <p style={{
+    color: '#64748b',
+    fontSize: '14px',
+    marginLeft: '44px',
+  }}>
+    All college notices in one place — updated live by admin
+  </p>
+</div>
 
         <input type="text" placeholder="🔍 Search announcements..." value={search}
           onChange={(e) => setSearch(e.target.value)}

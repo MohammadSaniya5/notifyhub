@@ -59,11 +59,78 @@ export default function Contact() {
     <main style={{ background: '#070d1b', minHeight: '100vh', padding: '48px 40px' }}>
       <div style={{ maxWidth: '700px', margin: '0 auto' }}>
 
-        {/* Header */}
-        <div style={{ marginBottom: '36px' }}>
-          <h1 style={{ fontSize: '36px', fontWeight: '700', color: '#f1f5f9', marginBottom: '8px' }}>📬 Contact Us</h1>
-          <p style={{ color: '#64748b', fontSize: '14px' }}>Have a query? Reach out and we will get back to you within 24 hours.</p>
-        </div>
+        {/* Fancy Header */}
+<div style={{
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  flexWrap: 'wrap',
+  gap: '16px',
+  marginBottom: '36px',
+}}>
+
+  {/* Left Side */}
+  <div style={{
+    display: 'flex',
+    alignItems: 'center',
+    gap: '14px',
+  }}>
+
+    {/* Icon Box */}
+    <span style={{
+      width: '48px',
+      height: '48px',
+      borderRadius: '14px',
+      background: 'linear-gradient(135deg,#3b82f6,#2563eb)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: '22px',
+      boxShadow: '0 0 22px rgba(37,99,235,0.35)',
+    }}>
+      ✉️
+    </span>
+
+    {/* Title */}
+    <div>
+      <h1 style={{
+        fontSize: '36px',
+        fontWeight: '700',
+        margin: 0,
+        background: 'linear-gradient(135deg,#ffffff,#60a5fa)',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        letterSpacing: '-1px',
+      }}>
+        Contact Hub
+      </h1>
+
+      <p style={{
+        color: '#64748b',
+        fontSize: '14px',
+        marginTop: '4px',
+      }}>
+        Have a query? Reach out and we’ll respond within 24 hours.
+      </p>
+    </div>
+
+  </div>
+
+  {/* Right Badge */}
+  <span style={{
+    background: 'rgba(37,99,235,0.12)',
+    color: '#60a5fa',
+    border: '1px solid rgba(37,99,235,0.35)',
+    fontSize: '11px',
+    padding: '6px 14px',
+    borderRadius: '999px',
+    fontWeight: '700',
+    boxShadow: '0 0 16px rgba(37,99,235,0.2)',
+  }}>
+    💬 SUPPORT ACTIVE
+  </span>
+
+</div>
 
         {/* Form */}
         {submitted ? (

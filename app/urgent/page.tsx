@@ -59,15 +59,64 @@ export default function Urgent() {
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
 
         {/* Header */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
-          <h1 style={{ fontSize: '36px', fontWeight: '700', color: '#f87171' }}>🚨 Urgent Alerts</h1>
-          <span style={{
-            background: blink ? 'rgba(239,68,68,0.2)' : 'transparent',
-            color: '#f87171', border: '1px solid rgba(239,68,68,0.4)',
-            fontSize: '10px', padding: '3px 10px', borderRadius: '99px',
-            fontWeight: '700', transition: 'background 0.3s',
-          }}>● LIVE</span>
-        </div>
+        <div style={{
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  flexWrap: 'wrap',
+  gap: '16px',
+  marginBottom: '8px',
+}}>
+
+  <div style={{
+    display: 'flex',
+    alignItems: 'center',
+    gap: '14px',
+  }}>
+
+    <span style={{
+      width: '46px',
+      height: '46px',
+      borderRadius: '14px',
+      background: 'linear-gradient(135deg,#ef4444,#dc2626)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: '22px',
+      boxShadow: '0 0 22px rgba(239,68,68,0.35)',
+    }}>
+      🛡️
+    </span>
+
+    <h1 style={{
+      fontSize: '36px',
+      fontWeight: '700',
+      margin: 0,
+      background: 'linear-gradient(135deg,#ffffff,#f87171)',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      letterSpacing: '-1px',
+    }}>
+      Urgent Alerts
+    </h1>
+
+  </div>
+
+  <span style={{
+    background: blink ? 'rgba(239,68,68,0.18)' : 'rgba(239,68,68,0.08)',
+    color: '#f87171',
+    border: '1px solid rgba(239,68,68,0.35)',
+    fontSize: '11px',
+    padding: '6px 14px',
+    borderRadius: '999px',
+    fontWeight: '700',
+    transition: 'all 0.3s ease',
+    boxShadow: blink ? '0 0 18px rgba(239,68,68,0.25)' : 'none',
+  }}>
+    ● LIVE MONITORING
+  </span>
+
+</div>
         <p style={{ color: '#64748b', fontSize: '14px', marginBottom: '36px' }}>
           High priority notices requiring immediate attention
         </p>
