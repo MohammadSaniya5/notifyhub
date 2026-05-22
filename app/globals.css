@@ -13,3 +13,135 @@ body {
   color: #ffffff;
   font-family: 'Inter', sans-serif;
 }
+
+/* Mobile responsive fixes */
+@media (max-width: 768px) {
+
+  /* Navbar */
+  nav {
+    padding: 0 16px !important;
+    height: auto !important;
+    flex-wrap: wrap !important;
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+    gap: 12px !important;
+  }
+
+  nav > div:last-child {
+    gap: 16px !important;
+    flex-wrap: wrap !important;
+  }
+
+  nav a {
+    font-size: 12px !important;
+  }
+
+  /* Hero heading */
+  h1 {
+    font-size: 36px !important;
+    letter-spacing: -1px !important;
+  }
+
+  /* All sections padding */
+  section, main > div {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  main {
+    padding: 24px 16px !important;
+  }
+
+  /* Stats grid — 2 columns on mobile */
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Features grid — 1 column on mobile */
+  .features-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* CTA buttons stack */
+  .cta-buttons {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  .cta-buttons a, .cta-buttons button {
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  /* Cards full width */
+  .card {
+    width: 100% !important;
+  }
+
+  /* Admin form grids — single column */
+  div[style*="grid-template-columns: 1fr 1fr"],
+  div[style*="grid-template-columns: 1fr 1fr 1fr"],
+  div[style*="repeat(4, 1fr)"],
+  div[style*="repeat(3, 1fr)"],
+  div[style*="repeat(2, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Footer center */
+  footer {
+    flex-direction: column !important;
+    text-align: center !important;
+    padding: 24px 16px !important;
+  }
+
+  /* CTA banner */
+  section[style*="margin: 0 40px"] {
+    margin: 0 16px 40px !important;
+    padding: 40px 20px !important;
+  }
+
+  /* Hero section */
+  section[style*="minHeight: '90vh'"] {
+    padding: 40px 16px !important;
+    min-height: 80vh !important;
+  }
+
+  /* Ticker */
+  div[style*="padding: '12px 40px'"] {
+    padding: 10px 12px !important;
+  }
+
+  /* Event/announcement cards */
+  div[style*="display: 'flex', justifyContent: 'space-between'"] {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  /* Register button full width on mobile */
+  a[style*="marginLeft: '24px'"] {
+    margin-left: 0 !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  /* Admin dashboard header */
+  div[style*="justifyContent: 'space-between', alignItems: 'center', marginBottom: '36px'"] {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 28px !important;
+  }
+
+  h2 {
+    font-size: 20px !important;
+  }
+
+  nav > div:last-child {
+    display: none !important;
+  }
+}

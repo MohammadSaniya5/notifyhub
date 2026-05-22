@@ -1,6 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useState } from 'react'
 
 const links = [
   { href: '/', label: 'Home' },
@@ -12,83 +13,112 @@ const links = [
 
 export default function Navbar() {
   const pathname = usePathname()
+  const [menuOpen, setMenuOpen] = useState(false)
 
   return (
     <nav style={{
       background: '#0a0f1e',
       borderBottom: '1px solid #1e3a5f',
       padding: '0 40px',
-      height: '64px',
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
       position: 'sticky',
       top: 0,
       zIndex: 50,
     }}>
-
-      {/* Logo */}
-      <Link href="/" style={{
+      <div style={{
         display: 'flex',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        gap: '10px',
-        textDecoration: 'none',
+        height: '64px',
       }}>
-        <div style={{
-          width: '34px',
-          height: '34px',
-          borderRadius: '8px',
-          background: '#2563eb',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: '18px',
-        }}>🔔</div>
-        <span style={{
-          fontSize: '18px',
-          fontWeight: '600',
-          color: '#f1f5f9',
-          letterSpacing: '-0.3px',
-        }}>NotifyHub</span>
-        <span style={{
-          fontSize: '10px',
-          background: 'rgba(37,99,235,0.2)',
-          color: '#60a5fa',
-          border: '1px solid rgba(37,99,235,0.3)',
-          padding: '2px 8px',
-          borderRadius: '99px',
-        }}>BETA</span>
-      </Link>
 
-      {/* Nav Links */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
-        {links.map((link) => (
-          <Link key={link.href} href={link.href} style={{
-            fontSize: '13px',
-            textDecoration: 'none',
-            color: pathname === link.href ? '#60a5fa' : '#64748b',
-            borderBottom: pathname === link.href ? '2px solid #60a5fa' : '2px solid transparent',
-            paddingBottom: '2px',
-            transition: 'color 0.2s',
-          }}>
-            {link.label}
-          </Link>
-        ))}
-
-        <Link href="/urgent" style={{
-          fontSize: '12px',
-          padding: '8px 16px',
-          borderRadius: '8px',
-          background: 'rgba(239,68,68,0.12)',
-          color: '#f87171',
-          border: '1px solid rgba(239,68,68,0.25)',
-          textDecoration: 'none',
-          fontWeight: '500',
+        {/* Logo */}
+        <Link href="/" style={{
+          display: 'flex', alignItems: 'center',
+          gap: '10px', textDecoration: 'none',
         }}>
-          🚨 Urgent
+          <div style={{
+            width: '34px', height: '34px', borderRadius: '8px',
+            background: '#2563eb', display: 'flex',
+            alignItems: 'center', justifyContent: 'center', fontSize: '18px',
+          }}>🔔</div>
+          <span style={{ fontSize: '18px', fontWeight: '600', color: '#f1f5f9' }}>NotifyHub</span>
+          <span style={{
+            fontSize: '10px', background: 'rgba(37,99,235,0.2)',
+            color: '#60a5fa', border: '1px solid rgba(37,99,235,0.3)',
+            padding: '2px 8px', borderRadius: '99px',
+          }}>BETA</span>
         </Link>
+
+        {/* Desktop Links */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}
+          className="desktop-nav">
+          {links.map((link) => (
+            <Link key={link.href} href={link.href} style={{
+              fontSize: '13px', textDecoration: 'none',
+              color: pathname === link.href ? '#60a5fa' : '#64748b',
+              borderBottom: pathname === link.href ? '2px solid #60a5fa' : '2px solid transparent',
+              paddingBottom: '2px',
+            }}>
+              {link.label}
+            </Link>
+          ))}
+          <Link href="/urgent" style={{
+            fontSize: '12px', padding: '8px 16px', borderRadius: '8px',
+            background: 'rgba(239,68,68,0.12)', color: '#f87171',
+            border: '1px solid rgba(239,68,68,0.25)', textDecoration: 'none',
+          }}>
+            🚨 Urgent
+          </Link>
+        </div>
+
+        {/* Hamburger */}
+        <button onClick={() => setMenuOpen(!menuOpen)}
+          className="hamburger"
+          style={{
+            display: 'none', background: 'none',
+            border: 'none', color: '#64748b',
+            fontSize: '24px', cursor: 'pointer',
+          }}>
+          {menuOpen ? '✕' : '☰'}
+        </button>
       </div>
 
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div style={{
+          borderTop: '1px solid #1e3a5f',
+          padding: '16px 0',
+          display: 'flex', flexDirection: 'column', gap: '4px',
+        }}>
+          {links.map((link) => (
+            <Link key={link.href} href={link.href}
+              onClick={() => setMenuOpen(false)}
+              style={{
+                fontSize: '14px', textDecoration: 'none',
+                color: pathname === link.href ? '#60a5fa' : '#94a3b8',
+                padding: '10px 16px', borderRadius: '8px',
+                background: pathname === link.href ? 'rgba(37,99,235,0.08)' : 'transparent',
+              }}>
+              {link.label}
+            </Link>
+          ))}
+          <Link href="/urgent" onClick={() => setMenuOpen(false)} style={{
+            fontSize: '14px', padding: '10px 16px', borderRadius: '8px',
+            background: 'rgba(239,68,68,0.08)', color: '#f87171',
+            textDecoration: 'none', marginTop: '8px',
+          }}>
+            🚨 Urgent Alerts
+          </Link>
+        </div>
+      )}
+
+      <style>{`
+        @media (max-width: 768px) {
+          .desktop-nav { display: none !important; }
+          .hamburger { display: block !important; }
+          nav { padding: 0 16px !important; }
+        }
+      `}</style>
     </nav>
   )
 }

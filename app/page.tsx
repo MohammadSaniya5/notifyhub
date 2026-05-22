@@ -2,21 +2,6 @@
 import Link from 'next/link'
 import { useEffect, useState, useRef } from 'react'
 
-const tickerItems = [
-  "🚨 Fee deadline — 25th May",
-  "📢 TCS Recruitment Drive — 28th May",
-  "📅 Sports Day — 1st June",
-  "📚 Exam Schedule Released",
-  "🎓 Convocation Ceremony — 10th June",
-]
-
-const stats = [
-  { num: 24, label: 'Notices This Month', color: '#3b82f6', suffix: '+' },
-  { num: 8, label: 'Upcoming Events', color: '#22c55e', suffix: '' },
-  { num: 3, label: 'Urgent Alerts', color: '#f87171', suffix: '' },
-  { num: 6, label: 'Departments', color: '#c084fc', suffix: '+' },
-]
-
 const features = [
   { icon: '📢', title: 'Instant Announcements', desc: 'Get every college notice the moment it is posted — no delays, no missed updates.' },
   { icon: '🚨', title: 'Urgent Alert System', desc: 'Exam deadlines, fee reminders and placement drives highlighted with priority alerts.' },
@@ -26,33 +11,47 @@ const features = [
   { icon: '⚡', title: 'Real-Time Updates', desc: 'No need to reload or check WhatsApp groups — the platform updates live.' },
 ]
 
+interface Announcement {
+  id: string
+  title: string
+  category: string
+  urgent: boolean
+  date: string
+}
+
 export default function Home() {
-  const [tickerIndex, setTickerIndex] = useState(0)
+  const [announcements, setAnnouncements] = useState<Announcement[]>([])
   const [counts, setCounts] = useState([0, 0, 0, 0])
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const tickerRef = useRef<HTMLDivElement>(null)
 
+  // Fetch real announcements from DB
   useEffect(() => {
-    const interval = setInterval(() => {
-      setTickerIndex((prev) => (prev + 1) % tickerItems.length)
-    }, 3000)
-    return () => clearInterval(interval)
-  }, [])
-
-  useEffect(() => {
-    const targets = [24, 8, 3, 6]
-    const current = [0, 0, 0, 0]
-    const timer = setInterval(() => {
-      let done = true
-      const updated = current.map((c, i) => {
-        if (c < targets[i]) { done = false; current[i]++; return current[i] }
-        return c
+    fetch('/api/announcements')
+      .then(res => res.json())
+      .then(data => {
+        setAnnouncements(data)
+        const total = data.length
+        const urgent = data.filter((a: Announcement) => a.urgent).length
+        const targets = [total, 8, urgent, 6]
+        const current = [0, 0, 0, 0]
+        const timer = setInterval(() => {
+          let done = true
+          const updated = current.map((c, i) => {
+            if (c < targets[i]) { done = false; current[i]++; return current[i] }
+            return c
+          })
+          setCounts([...updated])
+          if (done) clearInterval(timer)
+        }, 50)
       })
-      setCounts([...updated])
-      if (done) clearInterval(timer)
-    }, 50)
-    return () => clearInterval(timer)
+      .catch(() => {
+        const targets = [0, 0, 0, 6]
+        setCounts(targets)
+      })
   }, [])
 
+  // Stars animation
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -67,21 +66,15 @@ export default function Home() {
     window.addEventListener('resize', resize)
 
     const stars = Array.from({ length: 140 }, () => ({
-  x: Math.random() * canvas.width,
-  y: Math.random() * canvas.height,
-
-  r: Math.random() * 2 + 0.5,
-
-  opacity: Math.random() * 0.5 + 0.2,
-
-  twinkle: Math.random() * 0.01 + 0.002,
-
-  dir: Math.random() > 0.5 ? 1 : -1,
-
-  // smooth floating movement
-  dx: (Math.random() - 0.5) * 0.15,
-  dy: (Math.random() - 0.5) * 0.15,
-}))
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 2 + 0.5,
+      opacity: Math.random() * 0.5 + 0.2,
+      twinkle: Math.random() * 0.01 + 0.002,
+      dir: Math.random() > 0.5 ? 1 : -1,
+      dx: (Math.random() - 0.5) * 0.15,
+      dy: (Math.random() - 0.5) * 0.15,
+    }))
 
     let animId: number
     const animate = () => {
@@ -90,16 +83,9 @@ export default function Home() {
         star.opacity += star.twinkle * star.dir
         if (star.opacity > 0.9 || star.opacity < 0.1) star.dir *= -1
         star.x += star.dx
-star.y += star.dy
-
-// soft bounce
-if (star.x < 0 || star.x > canvas.width) {
-  star.dx *= -1
-}
-
-if (star.y < 0 || star.y > canvas.height) {
-  star.dy *= -1
-}
+        star.y += star.dy
+        if (star.x < 0 || star.x > canvas.width) star.dx *= -1
+        if (star.y < 0 || star.y > canvas.height) star.dy *= -1
         ctx.beginPath()
         ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2)
         ctx.fillStyle = `rgba(147,197,253,${star.opacity})`
@@ -114,6 +100,15 @@ if (star.y < 0 || star.y > canvas.height) {
       window.removeEventListener('resize', resize)
     }
   }, [])
+
+  const stats = [
+    { num: counts[0], label: 'Total Notices', color: '#3b82f6', suffix: '' },
+    { num: counts[1], label: 'Upcoming Events', color: '#22c55e', suffix: '' },
+    { num: counts[2], label: 'Urgent Alerts', color: '#f87171', suffix: '' },
+    { num: counts[3], label: 'Departments', color: '#c084fc', suffix: '+' },
+  ]
+
+  const year = new Date().getFullYear()
 
   return (
     <main style={{ background: '#070d1b', minHeight: '100vh' }}>
@@ -215,37 +210,84 @@ if (star.y < 0 || star.y > canvas.height) {
           </Link>
         </div>
 
-        {/* Scroll hint */}
+        {/* Scroll hint — clearly visible */}
         <div style={{
           position: 'absolute', bottom: '28px',
           left: '50%', transform: 'translateX(-50%)',
-          color: '#334155', fontSize: '12px',
+          display: 'flex', flexDirection: 'column',
+          alignItems: 'center', gap: '6px',
+          color: '#60a5fa', fontSize: '12px',
+          fontWeight: '500', letterSpacing: '1px',
+          animation: 'bounce 2s infinite',
         }}>
-          ↓ scroll to explore
+          <span>scroll to explore</span>
+          <span style={{ fontSize: '18px' }}>↓</span>
         </div>
+
+        <style>{`
+          @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(6px); }
+          }
+          @keyframes scrollLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+        `}</style>
       </section>
 
-      {/* LIVE TICKER */}
-      <div style={{
-        background: '#0a1628',
-        borderTop: '1px solid #1e3a5f',
-        borderBottom: '1px solid #1e3a5f',
-        padding: '12px 40px',
-        display: 'flex', alignItems: 'center', gap: '20px',
-      }}>
-        <span style={{
-          background: 'rgba(37,99,235,0.15)',
-          color: '#3b82f6', fontSize: '11px',
-          padding: '4px 12px', borderRadius: '99px',
-          fontWeight: '700', whiteSpace: 'nowrap',
-          letterSpacing: '1px',
-        }}>● LIVE</span>
-        <span style={{ color: '#94a3b8', fontSize: '13px' }}>
-          {tickerItems[tickerIndex]}
-        </span>
-      </div>
+      {/* LIVE ANNOUNCEMENTS TICKER */}
+      {announcements.length > 0 && (
+        <div style={{
+          background: '#0a1628',
+          borderTop: '1px solid #1e3a5f',
+          borderBottom: '1px solid #1e3a5f',
+          padding: '12px 0',
+          display: 'flex', alignItems: 'center',
+          overflow: 'hidden',
+          gap: '0',
+        }}>
+          {/* LIVE badge fixed */}
+          <div style={{
+            background: '#0a1628',
+            padding: '0 16px',
+            zIndex: 2,
+            flexShrink: 0,
+            borderRight: '1px solid #1e3a5f',
+          }}>
+            <span style={{
+              background: 'rgba(37,99,235,0.15)',
+              color: '#3b82f6', fontSize: '11px',
+              padding: '4px 12px', borderRadius: '99px',
+              fontWeight: '700', whiteSpace: 'nowrap',
+              letterSpacing: '1px',
+            }}>● LIVE</span>
+          </div>
 
-      {/* STATS */}
+          {/* Scrolling announcements */}
+          <div style={{ overflow: 'hidden', flex: 1 }}>
+            <div ref={tickerRef} style={{
+              display: 'flex', gap: '48px',
+              animation: 'scrollLeft 20s linear infinite',
+              width: 'max-content',
+              padding: '0 24px',
+            }}>
+              {[...announcements, ...announcements].map((a, i) => (
+                <span key={i} style={{
+                  color: a.urgent ? '#f87171' : '#94a3b8',
+                  fontSize: '13px', whiteSpace: 'nowrap',
+                  display: 'flex', alignItems: 'center', gap: '8px',
+                }}>
+                  {a.urgent && '🚨'} {a.title}
+                  <span style={{ color: '#334155', fontSize: '11px' }}>•</span>
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* STATS — real numbers from DB */}
       <section style={{ padding: '72px 40px 48px', maxWidth: '960px', margin: '0 auto' }}>
         <p style={{ color: '#3b82f6', fontSize: '12px', fontWeight: '600', letterSpacing: '2px', textAlign: 'center', marginBottom: '12px' }}>
           BY THE NUMBERS
@@ -266,7 +308,7 @@ if (star.y < 0 || star.y > canvas.height) {
                 background: `linear-gradient(90deg, transparent, ${stat.color}, transparent)`,
               }} />
               <div style={{ fontSize: '42px', fontWeight: '800', color: stat.color, marginBottom: '8px', letterSpacing: '-1px' }}>
-                {counts[i]}{stat.suffix}
+                {stat.num}{stat.suffix}
               </div>
               <div style={{ fontSize: '13px', color: '#64748b' }}>{stat.label}</div>
             </div>
@@ -338,29 +380,15 @@ if (star.y < 0 || star.y > canvas.height) {
         </div>
       </section>
 
-      {/* FOOTER */}
+      {/* FOOTER — clean, centered, auto year */}
       <footer style={{
-        borderTop: '1px solid #1e3a5f', padding: '32px 40px',
-        display: 'flex', justifyContent: 'space-between',
-        alignItems: 'center', flexWrap: 'wrap', gap: '16px',
+        borderTop: '1px solid #1e3a5f',
+        padding: '24px 40px',
+        textAlign: 'center',
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <div style={{
-            width: '30px', height: '30px', borderRadius: '8px',
-            background: '#2563eb', display: 'flex',
-            alignItems: 'center', justifyContent: 'center', fontSize: '16px',
-          }}>🔔</div>
-          <span style={{ color: '#f1f5f9', fontSize: '15px', fontWeight: '600' }}>NotifyHub</span>
-          <span style={{ color: '#334155', fontSize: '12px' }}>— Smart Campus Platform</span>
-        </div>
-        <div style={{ display: 'flex', gap: '24px' }}>
-          {[['Home', '/'], ['Announcements', '/announcements'], ['Events', '/events'], ['Urgent', '/urgent'], ['Contact', '/contact']].map(([label, href]) => (
-            <Link key={href} href={href} style={{ color: '#475569', fontSize: '12px', textDecoration: 'none' }}>
-              {label}
-            </Link>
-          ))}
-        </div>
-        <p style={{ color: '#334155', fontSize: '12px' }}>© 2025 NotifyHub. All rights reserved.</p>
+        <p style={{ color: '#a8b0ba', fontSize: '12px' }}>
+          © {year} NotifyHub. All rights reserved.
+        </p>
       </footer>
 
     </main>
