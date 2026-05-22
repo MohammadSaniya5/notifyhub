@@ -9,36 +9,21 @@ export default function AdminLogin() {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
-  const handleLogin = async (e: React.FormEvent) => {
-  e.preventDefault()
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+    setError('')
 
-  setLoading(true)
-  setError('')
-
-  try {
-    const res = await fetch('/api/admin/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-    })
-
-    if (res.ok) {
-      localStorage.setItem('admin_auth', 'true')
-      router.push('/admin/dashboard')
-    } else {
-      setError('Invalid username or password!')
-    }
-  } catch {
-    setError('Something went wrong!')
+    setTimeout(() => {
+      if (username === 'admin' && password === 'notifyhub123') {
+        localStorage.setItem('admin_auth', 'true')
+        router.push('/admin/dashboard')
+      } else {
+        setError('Invalid username or password!')
+        setLoading(false)
+      }
+    }, 800)
   }
-
-  setLoading(false)
-}
 
   return (
     <main style={{ background: '#070d1b', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px' }}>
