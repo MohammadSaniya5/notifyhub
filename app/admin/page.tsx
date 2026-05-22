@@ -29,12 +29,78 @@ export default function AdminLogin() {
     <main style={{ background: '#070d1b', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px' }}>
       <div style={{ width: '100%', maxWidth: '420px' }}>
 
-        {/* Logo */}
-        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: '#2563eb', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '26px', margin: '0 auto 16px' }}>🔔</div>
-          <h1 style={{ color: '#f1f5f9', fontSize: '24px', fontWeight: '700', marginBottom: '6px' }}>Admin Login</h1>
-          <p style={{ color: '#64748b', fontSize: '13px' }}>NotifyHub Control Panel</p>
-        </div>
+        {/* Modern Header */}
+<div style={{
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  marginBottom: '40px',
+  gap: '16px',
+}}>
+
+  {/* Left */}
+  <div style={{
+    display: 'flex',
+    alignItems: 'center',
+    gap: '14px',
+  }}>
+
+    {/* Icon Box (NO emoji style) */}
+    <div style={{
+      width: '52px',
+      height: '52px',
+      borderRadius: '14px',
+      background: 'linear-gradient(135deg,#2563eb,#1d4ed8)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      boxShadow: '0 0 22px rgba(37,99,235,0.35)',
+      fontSize: '18px',
+      fontWeight: '700',
+      color: '#bfdbfe',
+      letterSpacing: '1px',
+    }}>
+      NH
+    </div>
+
+    {/* Title */}
+    <div>
+      <h1 style={{
+        fontSize: '26px',
+        fontWeight: '700',
+        margin: 0,
+        color: '#f1f5f9',
+        letterSpacing: '-0.5px',
+      }}>
+        Admin Panel
+      </h1>
+
+      <p style={{
+        color: '#64748b',
+        fontSize: '13px',
+        marginTop: '4px',
+      }}>
+        NotifyHub Control Center
+      </p>
+    </div>
+
+  </div>
+
+  {/* Status Badge */}
+  <span style={{
+    background: 'rgba(37,99,235,0.12)',
+    color: '#60a5fa',
+    border: '1px solid rgba(37,99,235,0.35)',
+    fontSize: '11px',
+    padding: '6px 14px',
+    borderRadius: '999px',
+    fontWeight: '700',
+    boxShadow: '0 0 14px rgba(37,99,235,0.15)',
+  }}>
+    🔐 SECURE LOGIN
+  </span>
+
+</div>
 
         {/* Form */}
         <div style={{ background: '#0d1626', border: '1px solid #1e3a5f', borderRadius: '16px', padding: '36px' }}>
@@ -76,7 +142,7 @@ export default function AdminLogin() {
           </form>
         </div>
 
-        <p style={{ textAlign: 'center', color: '#334155', fontSize: '12px', marginTop: '24px' }}>
+        <p style={{ textAlign: 'center', color: '#8490a1', fontSize: '12px', marginTop: '24px' }}>
           Students don't need login — just visit the website!
         </p>
       </div>

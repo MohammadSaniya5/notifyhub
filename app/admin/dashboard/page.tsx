@@ -153,17 +153,100 @@ const [answerText, setAnswerText] = useState<Record<string, string>>({})
 
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
 
-        {/* Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '36px' }}>
-          <div>
-            <h1 style={{ color: '#f1f5f9', fontSize: '28px', fontWeight: '700', marginBottom: '4px' }}>👨‍💼 Admin Dashboard</h1>
-            <p style={{ color: '#64748b', fontSize: '13px' }}>Manage announcements and events</p>
-          </div>
-          <button onClick={() => { localStorage.removeItem('admin_auth'); router.push('/admin') }}
-            style={{ padding: '8px 20px', background: 'rgba(239,68,68,0.1)', color: '#f87171', border: '1px solid rgba(239,68,68,0.25)', borderRadius: '8px', cursor: 'pointer', fontSize: '13px' }}>
-            Logout
-          </button>
-        </div>
+        {/* Modern Admin Header */}
+<div style={{
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  marginBottom: '36px',
+  flexWrap: 'wrap',
+  gap: '16px',
+}}>
+
+  {/* Left Section */}
+  <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+
+    {/* Icon / Brand Block (no emoji style) */}
+    <div style={{
+      width: '52px',
+      height: '52px',
+      borderRadius: '14px',
+      background: 'linear-gradient(135deg,#2563eb,#1d4ed8)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: '16px',
+      fontWeight: '800',
+      color: '#bfdbfe',
+      letterSpacing: '1px',
+      boxShadow: '0 0 24px rgba(37,99,235,0.3)',
+    }}>
+      NH
+    </div>
+
+    {/* Title + Subtitle */}
+    <div>
+      <h1 style={{
+        color: '#f1f5f9',
+        fontSize: '28px',
+        fontWeight: '700',
+        margin: 0,
+        letterSpacing: '-0.5px',
+      }}>
+        Admin Console
+      </h1>
+
+      <p style={{
+        color: '#64748b',
+        fontSize: '13px',
+        marginTop: '4px',
+      }}>
+        Manage announcements, events & student queries
+      </p>
+    </div>
+
+  </div>
+
+  {/* Right Side Controls */}
+  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+
+    {/* Status badge */}
+    <span style={{
+      background: 'rgba(37,99,235,0.12)',
+      color: '#60a5fa',
+      border: '1px solid rgba(37,99,235,0.35)',
+      fontSize: '11px',
+      padding: '6px 14px',
+      borderRadius: '999px',
+      fontWeight: '700',
+      boxShadow: '0 0 14px rgba(37,99,235,0.15)',
+    }}>
+      ⚡ LIVE SYSTEM
+    </span>
+
+    {/* Logout Button */}
+    <button
+      onClick={() => {
+        localStorage.removeItem('admin_auth')
+        router.push('/admin')
+      }}
+      style={{
+        padding: '8px 18px',
+        background: 'rgba(239,68,68,0.08)',
+        color: '#f87171',
+        border: '1px solid rgba(239,68,68,0.25)',
+        borderRadius: '8px',
+        cursor: 'pointer',
+        fontSize: '13px',
+        fontWeight: '600',
+      }}
+    >
+      Logout
+    </button>
+
+  </div>
+
+</div>
 
         {/* Tabs */}
         <div style={{ display: 'flex', gap: '8px', marginBottom: '28px' }}>
