@@ -55,10 +55,10 @@ function Countdown({ deadline }: { deadline: string }) {
   }, [deadline])
 
   return (
-  <span style={{ color: '#fbbf24', fontSize: '12px', fontWeight: '600' }}>
-    🕒 Now: {new Date().toLocaleDateString()} | {new Date().toLocaleTimeString()}
-  </span>
-)
+    <span style={{ color: '#fbbf24', fontSize: '12px', fontWeight: '600' }}>
+      🕒 Now: {new Date().toLocaleDateString()} | {new Date().toLocaleTimeString()}
+    </span>
+  )
 }
 
 export default function Urgent() {

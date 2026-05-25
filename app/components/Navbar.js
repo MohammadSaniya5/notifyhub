@@ -42,20 +42,20 @@ export default function Navbar() {
             alignItems: 'center', justifyContent: 'center', fontSize: '18px',
           }}>🔔</div>
           <span style={{
-  fontSize: '22px',
-  fontWeight: '700',
-  position: 'relative',
-  color: '#f8fafc',
-  letterSpacing: '0.5px',
-  background: 'linear-gradient(120deg, #f8fafc 0%, #60a5fa 35%, #ffffff 50%, #60a5fa 65%, #f8fafc 100%)',
-  backgroundSize: '200% auto',
-  WebkitBackgroundClip: 'text',
-  WebkitTextFillColor: 'transparent',
-  animation: 'shine 4s linear infinite',
-}}>
-  NotifyHub
-</span>
-           
+            fontSize: '22px',
+            fontWeight: '700',
+            position: 'relative',
+            color: '#f8fafc',
+            letterSpacing: '0.5px',
+            background: 'linear-gradient(120deg, #f8fafc 0%, #60a5fa 35%, #ffffff 50%, #60a5fa 65%, #f8fafc 100%)',
+            backgroundSize: '200% auto',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            animation: 'shine 4s linear infinite',
+          }}>
+            NotifyHub
+          </span>
+
         </Link>
 
         {/* Desktop Links */}

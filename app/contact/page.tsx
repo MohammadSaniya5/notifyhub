@@ -19,13 +19,13 @@ export default function Contact() {
   const [queries, setQueries] = useState<Query[]>([])
   const [openFaq, setOpenFaq] = useState<number | null>(null)
 
-  const departments = ['CSE', 'ECE', 'Mechanical', 'Civil', 'MBA', 'MCA', 'Other']
+  const departments = ['CSE', 'AIML', 'EEE', 'ECE', 'Mechanical', 'Civil', 'DS', 'AIDS']
 
   useEffect(() => {
     fetch('/api/queries')
       .then(res => res.json())
       .then(data => setQueries(data.filter((q: Query) => q.answered)))
-      .catch(() => {})
+      .catch(() => { })
   }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -38,7 +38,7 @@ export default function Contact() {
         body: JSON.stringify(form),
       })
       if (res.ok) setSubmitted(true)
-    } catch {}
+    } catch { }
     setPosting(false)
   }
 
@@ -60,77 +60,77 @@ export default function Contact() {
       <div style={{ maxWidth: '700px', margin: '0 auto' }}>
 
         {/* Fancy Header */}
-<div style={{
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  flexWrap: 'wrap',
-  gap: '16px',
-  marginBottom: '36px',
-}}>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '16px',
+          marginBottom: '36px',
+        }}>
 
-  {/* Left Side */}
-  <div style={{
-    display: 'flex',
-    alignItems: 'center',
-    gap: '14px',
-  }}>
+          {/* Left Side */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '14px',
+          }}>
 
-    {/* Icon Box */}
-    <span style={{
-      width: '48px',
-      height: '48px',
-      borderRadius: '14px',
-      background: 'linear-gradient(135deg,#3b82f6,#2563eb)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      fontSize: '22px',
-      boxShadow: '0 0 22px rgba(37,99,235,0.35)',
-    }}>
-      ✉️
-    </span>
+            {/* Icon Box */}
+            <span style={{
+              width: '48px',
+              height: '48px',
+              borderRadius: '14px',
+              background: 'linear-gradient(135deg,#3b82f6,#2563eb)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '22px',
+              boxShadow: '0 0 22px rgba(37,99,235,0.35)',
+            }}>
+              ✉️
+            </span>
 
-    {/* Title */}
-    <div>
-      <h1 style={{
-        fontSize: '36px',
-        fontWeight: '700',
-        margin: 0,
-        background: 'linear-gradient(135deg,#ffffff,#60a5fa)',
-        WebkitBackgroundClip: 'text',
-        WebkitTextFillColor: 'transparent',
-        letterSpacing: '-1px',
-      }}>
-        Contact Hub
-      </h1>
+            {/* Title */}
+            <div>
+              <h1 style={{
+                fontSize: '36px',
+                fontWeight: '700',
+                margin: 0,
+                background: 'linear-gradient(135deg,#ffffff,#60a5fa)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                letterSpacing: '-1px',
+              }}>
+                Contact Hub
+              </h1>
 
-      <p style={{
-        color: '#64748b',
-        fontSize: '14px',
-        marginTop: '4px',
-      }}>
-        Have a query? Reach out and we’ll respond within 24 hours.
-      </p>
-    </div>
+              <p style={{
+                color: '#64748b',
+                fontSize: '14px',
+                marginTop: '4px',
+              }}>
+                Have a query? Reach out and we’ll respond within 24 hours.
+              </p>
+            </div>
 
-  </div>
+          </div>
 
-  {/* Right Badge */}
-  <span style={{
-    background: 'rgba(37,99,235,0.12)',
-    color: '#60a5fa',
-    border: '1px solid rgba(37,99,235,0.35)',
-    fontSize: '11px',
-    padding: '6px 14px',
-    borderRadius: '999px',
-    fontWeight: '700',
-    boxShadow: '0 0 16px rgba(37,99,235,0.2)',
-  }}>
-    💬 SUPPORT ACTIVE
-  </span>
+          {/* Right Badge */}
+          <span style={{
+            background: 'rgba(37,99,235,0.12)',
+            color: '#60a5fa',
+            border: '1px solid rgba(37,99,235,0.35)',
+            fontSize: '11px',
+            padding: '6px 14px',
+            borderRadius: '999px',
+            fontWeight: '700',
+            boxShadow: '0 0 16px rgba(37,99,235,0.2)',
+          }}>
+            💬 SUPPORT ACTIVE
+          </span>
 
-</div>
+        </div>
 
         {/* Form */}
         {submitted ? (

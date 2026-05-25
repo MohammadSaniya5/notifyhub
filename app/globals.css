@@ -27,7 +27,7 @@ body {
     gap: 12px !important;
   }
 
-  nav > div:last-child {
+  nav>div:last-child {
     gap: 16px !important;
     flex-wrap: wrap !important;
   }
@@ -43,7 +43,8 @@ body {
   }
 
   /* All sections padding */
-  section, main > div {
+  section,
+  main>div {
     padding-left: 16px !important;
     padding-right: 16px !important;
   }
@@ -68,7 +69,8 @@ body {
     width: 100% !important;
   }
 
-  .cta-buttons a, .cta-buttons button {
+  .cta-buttons a,
+  .cta-buttons button {
     width: 100% !important;
     text-align: center !important;
   }
@@ -141,7 +143,7 @@ body {
     font-size: 20px !important;
   }
 
-  nav > div:last-child {
+  nav>div:last-child {
     display: none !important;
   }
 }

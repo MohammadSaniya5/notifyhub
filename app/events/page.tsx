@@ -77,36 +77,36 @@ export default function Events() {
         {/* Header */}
         <div style={{ marginBottom: '36px' }}>
           <h1 style={{
-  fontSize: '36px',
-  fontWeight: '700',
-  color: '#f1f5f9',
-  marginBottom: '8px',
-  display: 'flex',
-  alignItems: 'center',
-  gap: '12px',
-}}>
-  <span style={{
-    width: '42px',
-    height: '42px',
-    borderRadius: '12px',
-    background: 'linear-gradient(135deg,#7c3aed,#2563eb)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '20px',
-    boxShadow: '0 0 18px rgba(99,102,241,0.35)',
-  }}>
-    🎭
-  </span>
+            fontSize: '36px',
+            fontWeight: '700',
+            color: '#f1f5f9',
+            marginBottom: '8px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+          }}>
+            <span style={{
+              width: '42px',
+              height: '42px',
+              borderRadius: '12px',
+              background: 'linear-gradient(135deg,#7c3aed,#2563eb)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '20px',
+              boxShadow: '0 0 18px rgba(99,102,241,0.35)',
+            }}>
+              🎭
+            </span>
 
-  <span style={{
-    background: 'linear-gradient(135deg,#f8fafc,#c084fc)',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-  }}>
-    Events
-  </span>
-</h1>
+            <span style={{
+              background: 'linear-gradient(135deg,#f8fafc,#c084fc)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}>
+              Events
+            </span>
+          </h1>
           <p style={{ color: '#64748b', fontSize: '14px' }}>
             All college events, drives and ceremonies in one place
           </p>

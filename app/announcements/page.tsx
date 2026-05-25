@@ -40,42 +40,42 @@ export default function Announcements() {
       <div style={{ maxWidth: '900px', margin: '0 auto' }}>
 
         <div style={{ marginBottom: '32px' }}>
-  <h1 style={{
-    fontSize: '36px',
-    fontWeight: '700',
-    color: '#f1f5f9',
-    marginBottom: '8px',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '12px',
-    letterSpacing: '-1px',
-  }}>
-    
-    <span style={{
-      fontSize: '30px',
-      filter: 'drop-shadow(0 0 10px rgba(96,165,250,0.35))',
-    }}>
-      🏛️
-    </span>
+          <h1 style={{
+            fontSize: '36px',
+            fontWeight: '700',
+            color: '#f1f5f9',
+            marginBottom: '8px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+            letterSpacing: '-1px',
+          }}>
 
-    <span style={{
-      background: 'linear-gradient(135deg, #f8fafc 0%, #60a5fa 100%)',
-      WebkitBackgroundClip: 'text',
-      WebkitTextFillColor: 'transparent',
-    }}>
-      Announcements
-    </span>
+            <span style={{
+              fontSize: '30px',
+              filter: 'drop-shadow(0 0 10px rgba(96,165,250,0.35))',
+            }}>
+              🏛️
+            </span>
 
-  </h1>
+            <span style={{
+              background: 'linear-gradient(135deg, #f8fafc 0%, #60a5fa 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}>
+              Announcements
+            </span>
 
-  <p style={{
-    color: '#64748b',
-    fontSize: '14px',
-    marginLeft: '44px',
-  }}>
-    All college notices in one place — updated live by admin
-  </p>
-</div>
+          </h1>
+
+          <p style={{
+            color: '#64748b',
+            fontSize: '14px',
+            marginLeft: '44px',
+          }}>
+            All college notices in one place — updated live by admin
+          </p>
+        </div>
 
         <input type="text" placeholder="🔍 Search announcements..." value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -117,18 +117,18 @@ export default function Announcements() {
                   <div style={{ marginTop: '16px', paddingTop: '16px', borderTop: '1px solid #1e3a5f' }}>
                     <p style={{ color: '#94a3b8', fontSize: '13px', lineHeight: '1.7', marginBottom: '12px' }}>{a.description}</p>
                     {a.image && <Image
-  src={a.image}
-  alt="announcement"
-  width={800}
-  height={400}
-  style={{
-    width: '100%',
-    borderRadius: '8px',
-    marginBottom: '12px',
-    maxHeight: '300px',
-    objectFit: 'cover',
-  }}
-/>}
+                      src={a.image}
+                      alt="announcement"
+                      width={800}
+                      height={400}
+                      style={{
+                        width: '100%',
+                        borderRadius: '8px',
+                        marginBottom: '12px',
+                        maxHeight: '300px',
+                        objectFit: 'cover',
+                      }}
+                    />}
                     {a.link && <a href={a.link} target="_blank" rel="noreferrer" style={{ color: '#3b82f6', fontSize: '13px' }}>🔗 View Link →</a>}
                   </div>
                 )}

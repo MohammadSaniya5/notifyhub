@@ -30,77 +30,77 @@ export default function AdminLogin() {
       <div style={{ width: '100%', maxWidth: '420px' }}>
 
         {/* Modern Header */}
-<div style={{
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  marginBottom: '40px',
-  gap: '16px',
-}}>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          marginBottom: '40px',
+          gap: '16px',
+        }}>
 
-  {/* Left */}
-  <div style={{
-    display: 'flex',
-    alignItems: 'center',
-    gap: '14px',
-  }}>
+          {/* Left */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '14px',
+          }}>
 
-    {/* Icon Box (NO emoji style) */}
-    <div style={{
-      width: '52px',
-      height: '52px',
-      borderRadius: '14px',
-      background: 'linear-gradient(135deg,#2563eb,#1d4ed8)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      boxShadow: '0 0 22px rgba(37,99,235,0.35)',
-      fontSize: '18px',
-      fontWeight: '700',
-      color: '#bfdbfe',
-      letterSpacing: '1px',
-    }}>
-      NH
-    </div>
+            {/* Icon Box (NO emoji style) */}
+            <div style={{
+              width: '52px',
+              height: '52px',
+              borderRadius: '14px',
+              background: 'linear-gradient(135deg,#2563eb,#1d4ed8)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 0 22px rgba(37,99,235,0.35)',
+              fontSize: '18px',
+              fontWeight: '700',
+              color: '#bfdbfe',
+              letterSpacing: '1px',
+            }}>
+              NH
+            </div>
 
-    {/* Title */}
-    <div>
-      <h1 style={{
-        fontSize: '26px',
-        fontWeight: '700',
-        margin: 0,
-        color: '#f1f5f9',
-        letterSpacing: '-0.5px',
-      }}>
-        Admin Panel
-      </h1>
+            {/* Title */}
+            <div>
+              <h1 style={{
+                fontSize: '26px',
+                fontWeight: '700',
+                margin: 0,
+                color: '#f1f5f9',
+                letterSpacing: '-0.5px',
+              }}>
+                Admin Panel
+              </h1>
 
-      <p style={{
-        color: '#64748b',
-        fontSize: '13px',
-        marginTop: '4px',
-      }}>
-        NotifyHub Control Center
-      </p>
-    </div>
+              <p style={{
+                color: '#64748b',
+                fontSize: '13px',
+                marginTop: '4px',
+              }}>
+                NotifyHub Control Center
+              </p>
+            </div>
 
-  </div>
+          </div>
 
-  {/* Status Badge */}
-  <span style={{
-    background: 'rgba(37,99,235,0.12)',
-    color: '#60a5fa',
-    border: '1px solid rgba(37,99,235,0.35)',
-    fontSize: '11px',
-    padding: '6px 14px',
-    borderRadius: '999px',
-    fontWeight: '700',
-    boxShadow: '0 0 14px rgba(37,99,235,0.15)',
-  }}>
-    🔐 SECURE LOGIN
-  </span>
+          {/* Status Badge */}
+          <span style={{
+            background: 'rgba(37,99,235,0.12)',
+            color: '#60a5fa',
+            border: '1px solid rgba(37,99,235,0.35)',
+            fontSize: '11px',
+            padding: '6px 14px',
+            borderRadius: '999px',
+            fontWeight: '700',
+            boxShadow: '0 0 14px rgba(37,99,235,0.15)',
+          }}>
+            🔐 SECURE LOGIN
+          </span>
 
-</div>
+        </div>
 
         {/* Form */}
         <div style={{ background: '#0d1626', border: '1px solid #1e3a5f', borderRadius: '16px', padding: '36px' }}>
